@@ -5,11 +5,11 @@ from typing import Any
 
 @dataclass
 class Context:
-    """كل اللي الـ module محتاجه. هتتملى بالحقيقي في Phase 1."""
+    """Everything a module needs. Filled with real objects in Phase 1."""
     scan_id: int
     config: Any = None
     db: Any = None
-    http: Any = None     # كل الـ requests لازم تعدّي من هنا (scope + rate limit)
+    http: Any = None     # every request must go through here (scope + rate limit)
     dns: Any = None
     ports: Any = None
     scope: Any = None
@@ -22,4 +22,4 @@ class BaseModule(ABC):
 
     @abstractmethod
     async def run(self, ctx: Context) -> None:
-        """يقرا مدخلاته من ctx.db ويكتب نتايجه فيها."""
+        """Read inputs from ctx.db, do the work, write results back to ctx.db."""
